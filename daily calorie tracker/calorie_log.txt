@@ -1,0 +1,10 @@
+===== Daily Calorie Report =====
+Meal Name	Calories
+-----------------------------------
+breakfast		200.0
+dinner		150.0
+-----------------------------------
+Total:		350.0
+Average:	175.00
+ Warning: You have exceeded your daily calorie limit!This is serious!!
+
