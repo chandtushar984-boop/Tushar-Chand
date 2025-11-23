@@ -1,0 +1,122 @@
+# Name:Tushar CHand
+# Course:Btech Cse Cybersecurity
+
+
+
+
+
+
+
+class Book:
+    def __init__(self, title, author, isbn):
+        self.title = title
+        self.author = author
+        self.isbn = isbn
+        self.status = "available"
+
+    def issue(self):
+        if self.status == "available":
+            self.status = "issued"
+            print("Book issued successfully!")
+        else:
+            print("Book is already issued.")
+
+    def return_book(self):
+        if self.status == "issued":
+            self.status = "available"
+            print("Book returned successfully!")
+        else:
+            print("Book is already available.")
+
+    def is_available(self):
+        return self.status == "available"
+
+    def __str__(self):
+        return f"{self.title} by {self.author} | ISBN: {self.isbn} | Status: {self.status}"
+
+
+class LibraryInventory:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, title, author, isbn):
+        new_book = Book(title, author, isbn)
+        self.books.append(new_book)
+        print("Book added successfully!")
+
+    def search_by_title(self, title):
+        for book in self.books:
+            if book.title.lower() == title.lower():
+                return book
+        return None
+
+    def search_by_isbn(self, isbn):
+        for book in self.books:
+            if book.isbn == isbn:
+                return book
+        return None
+
+    def display_all(self):
+        if not self.books:
+            print("No books in library.")
+            return
+        for book in self.books:
+            print(book)
+
+
+def main():
+    library = LibraryInventory()
+
+    while True:
+        print("\n===== Library Menu =====")
+        print("1. Add Book")
+        print("2. Issue Book")
+        print("3. Return Book")
+        print("4. View All Books")
+        print("5. Search Book")
+        print("6. Exit")
+
+        choice = input("Enter choice: ")
+
+        if choice == "1":
+            title = input("Enter title: ")
+            author = input("Enter author: ")
+            isbn = input("Enter ISBN: ")
+            library.add_book(title, author, isbn)
+
+        elif choice == "2":
+            isbn = input("Enter ISBN to issue: ")
+            book = library.search_by_isbn(isbn)
+            if book:
+                book.issue()
+            else:
+                print("Book not found.")
+
+        elif choice == "3":
+            isbn = input("Enter ISBN to return: ")
+            book = library.search_by_isbn(isbn)
+            if book:
+                book.return_book()
+            else:
+                print("Book not found.")
+
+        elif choice == "4":
+            library.display_all()
+
+        elif choice == "5":
+            title = input("Enter title to search: ")
+            book = library.search_by_title(title)
+            if book:
+                print(book)
+            else:
+                print("Book not found.")
+
+        elif choice == "6":
+            print("Exiting...")
+            break
+
+        else:
+            print("Invalid choice! Try again.")
+
+
+main()
